@@ -1,5 +1,5 @@
 # Use the circi/php with node parent image
-FROM 7.2-node-browsers-legacy
+FROM circleci/php:7.2-node-browsers-legacy
 
 # Set the working directory to /build-tools-ci
 WORKDIR /build-tools-ci
