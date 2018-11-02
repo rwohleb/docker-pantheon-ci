@@ -14,6 +14,12 @@ RUN chmod +rx /build-tools-ci/scripts/*
 
 # Collect the components we need for this image
 RUN apt-get update
+RUN apt-get install -y libpng-dev libjpeg-turbo-dev postgresql-dev libxml2-dev
+RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+  && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip \
+  && docker-php-ext-install opcache bcmath soap \
+  && pecl install redis-3.1.1 \
+  && docker-php-ext-enable redis
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
 RUN mkdir -p /usr/local/share/terminus
 RUN /usr/bin/env COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share/terminus require pantheon-systems/terminus:"^1.8"
