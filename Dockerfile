@@ -14,7 +14,7 @@ RUN chmod +rx /build-tools-ci/scripts/*
 
 # Collect the components we need for this image
 RUN apt-get update
-RUN apt-get install -y libpng-dev libjpeg-turbo8-dev libxml2-dev
+RUN apt-get install -y libpng-dev libjpeg62-turbo-dev libxml2-dev
 RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
   && docker-php-ext-install gd mbstring pdo_mysql pdo_pgsql zip \
   && docker-php-ext-install opcache bcmath soap \
