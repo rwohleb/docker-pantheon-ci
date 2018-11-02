@@ -7,6 +7,8 @@ WORKDIR /build-tools-ci
 # Copy the current directory contents into the container at /build-tools-ci
 ADD . /build-tools-ci
 
+USER root
+
 # Collect the components we need for this image
 RUN apt-get update
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
@@ -16,6 +18,8 @@ RUN mkdir -p /usr/local/share/drush
 RUN /usr/bin/env composer -n --working-dir=/usr/local/share/drush require drush/drush "^8"
 RUN ln -fs /usr/local/share/drush/vendor/drush/drush/drush /usr/local/bin/drush
 RUN chmod +x /usr/local/bin/drush
+
+USER circleci
 
 env TERMINUS_PLUGINS_DIR /usr/local/share/terminus-plugins
 RUN mkdir -p /usr/local/share/terminus-plugins
