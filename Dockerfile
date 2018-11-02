@@ -9,6 +9,9 @@ ADD . /build-tools-ci
 
 USER root
 
+# Make sure the scripts are accessible.
+RUN chmod +rx /build-tools-ci/scripts/*
+
 # Collect the components we need for this image
 RUN apt-get update
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
